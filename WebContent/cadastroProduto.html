@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Cadastro de Produto</title>
+
+</head>
+
+<body>
+
+	<fieldset>
+	
+		<legend>Cadastro de Produto</legend>
+		
+		<form action="ProdutoCtrl" method="POST" id="formCadastroProduto">
+			<br>
+			<label>Id:</label> 
+			<input value="" name="id"/> 
+			<button type="submit" name="submit" value="submit_Buscar">Buscar</button>
+			<br>
+			
+			<label>Nome:</label> 
+			<input value="" name="nome" maxlength="20" />
+			<br>
+			
+			<label>Preço:</label> 
+			<input value="" name="preco" maxlength="20"/>
+			<br>
+		
+			<button type="submit" name="submit" value="submit_Cadastrar">Cadastrar</button>
+			
+			<button type="submit" name="submit" value="submit_Excluir">Excluir</button>
+			
+		</form>
+		
+	</fieldset>
+
+</body>
+
+</html>
