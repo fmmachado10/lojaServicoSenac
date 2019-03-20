@@ -51,7 +51,7 @@ public class ProdutoCtrl extends HttpServlet {
 		} else if (request.getParameter("submit").equals("submit_Excluir")) {
 			
 			//excluir(produto);
-			//response.getWriter().println("Excluído com sucesso.");
+			//response.getWriter().println("Excluï¿½do com sucesso.");
 			
 		}
 	
@@ -63,7 +63,7 @@ public class ProdutoCtrl extends HttpServlet {
 
 		doGet(request, response);
 
-		System.out.println("método doPost...");
+		System.out.println("MÃ©todo Post...");
 
 	}
 	
@@ -85,6 +85,18 @@ public class ProdutoCtrl extends HttpServlet {
 	}
 	
 	public String actionGravar(Produto produto) {
+		if (produto.getId() == 0) {
+			
+			ProdutoDAO.inserir(produto);
+			return "";
+		}
+		else {
+			ProdutoDAO.alterar(produto);
+			return "lista_produto";
+		}
+	}
+	
+	public String actionGravar() {
 		if (produto.getId() == 0) {
 			
 			ProdutoDAO.inserir(produto);
