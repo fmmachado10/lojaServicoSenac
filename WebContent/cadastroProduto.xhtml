@@ -18,18 +18,18 @@
 				</f:facet>
 				
 				<h:outputLabel value="Id" />
-				<h:inputText readonly="true" value="#{produtoCtrl.produto.id}" />
+				<h:inputText readonly="true" value="#{cadastroProdutoCtrl.produto.id}" />
 
 				<h:outputLabel value="Descrição" />
-				<h:inputText value="#{produtoCtrl.produto.nome}" />
+				<h:inputText value="#{cadastroProdutoCtrl.produto.nome}" />
 
 				<h:outputLabel value="Preço" />
-				<h:inputText value="#{produtoCtrl.produto.preco}" />
+				<h:inputText value="#{cadastroProdutoCtrl.produto.preco}" />
 
 			</h:panelGrid>
 			
 			<h:commandButton value="Cancelar" action="lista_equipamento"/>
-			<h:commandButton value="Cadastrar" action="#{produtoCtrl.actionGravar}"/>
+			<h:commandButton value="Cadastrar" action="#{cadastroProdutoCtrl.actionGravar}"/>
 			
 			
 		</div>
