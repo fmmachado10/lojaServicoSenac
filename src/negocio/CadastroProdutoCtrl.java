@@ -4,13 +4,21 @@ import java.util.List;
 
 import bean.Produto;
 import persistencia.ProdutoDAO;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
+@ManagedBean
+@SessionScoped
 public class CadastroProdutoCtrl {
 
 	private final String PAG_LISTA = "lista_equipamento";
 	private final String PAG_FORM = "cadastroProduto";
 	
 	private Produto produto;
+	
+	public CadastroProdutoCtrl() {
+		this.produto = new Produto();
+	}
 
 	public Produto getProduto() {
 		return produto;
