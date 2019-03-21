@@ -21,7 +21,7 @@ public class Produto {
 	
 	@Column(name = "pro_preco", nullable=true)
 	private Float preco;
-	
+
 	public long getId() {
 		return id;
 	}
