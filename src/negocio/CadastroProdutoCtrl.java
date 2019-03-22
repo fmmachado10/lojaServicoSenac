@@ -60,5 +60,10 @@ public class CadastroProdutoCtrl {
 		return null;
 	}
 	
+	public void limpar(){
+        this.produto = new Produto();
+        System.out.println("limpando...");        
+    }
+	
 	
 }

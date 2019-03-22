@@ -4,12 +4,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Cadastro de Produto</title>
 </h:head>
 <h:body>
+
+	<style type="text/css">
+        .ui-datalist .ui-datalist-content {
+            border: 0 none
+        }
+        .ui-datalist ul {
+            padding: 0px 10px 0 20px;
+            margin: 5px 0;
+        }
+        .value {
+            font-weight: bold;
+        }
+        .ui-autocomplete-itemtip {
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    </style>
+
 	<h:form>
 		<div align="center">
 			<h:panelGrid columns="2">
@@ -31,6 +51,9 @@
 			<h:commandButton value="Cancelar" action="lista_equipamento"/>
 			<h:commandButton value="Cadastrar" action="#{cadastroProdutoCtrl.actionGravar}"/>
 			
+			<p:commandButton value="Limpar" id="withIcon2" action="#{cadastroProdutoCtrl.limpar}" update="@form"
+                  style="margin-right:20px;" icon="pi pi-save" immediate="true" process="@this"/>
+                  
 			
 		</div>
 	</h:form>
