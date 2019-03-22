@@ -2,18 +2,27 @@ package negocio;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import bean.Produto;
 import persistencia.ProdutoDAO;
 
+@ManagedBean
+@SessionScoped
 public class CadastroProdutoCtrl {
 
-	private final String PAG_LISTA = "lista_equipamento";
+	private final String PAG_LISTA = "listaProduto";
 	private final String PAG_FORM = "cadastroProduto";
 	
 	private Produto produto;
 
 	public Produto getProduto() {
 		return produto;
+	}
+	
+	public CadastroProdutoCtrl() {		
+		this.produto = new Produto();
 	}
 
 	public void setEquipamento(Produto produto) {

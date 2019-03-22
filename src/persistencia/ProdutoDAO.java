@@ -55,9 +55,9 @@ public class ProdutoDAO implements Serializable {
 			
 		}else {
 			
-			consulta = sessao.createQuery("");
+			consulta = sessao.createQuery("from Produto where pro_nome like :parametro order by pro_nome");
 			
-			consulta.setString("", "");
+			consulta.setString(":parametro", "%" + filtro + "%");
 			
 		}
 		

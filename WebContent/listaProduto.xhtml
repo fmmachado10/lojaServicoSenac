@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Lista de Produtos</title>
+</h:head>
+<h:body>
+	<h:form>
+		<div align="center">
+			<h:commandLink value="Inserir" action="#{cadastroProdutoCtrl.actionInserir}"/>
+			
+			<h:dataTable value="#{cadastroProdutoCtrl.pesquisar}" var="p">
+				<f:facet name="header"><h:outputLabel value="Lista de Produtos"/></f:facet>
+				<h:column>
+					<f:facet name="header"><h:outputLabel value="Código"/></f:facet>
+					<h:outputLabel value="#{p.id}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputLabel value="Descrição"/></f:facet>
+					<h:outputLabel value="#{p.nome}"/>
+				</h:column>
+				
+				<h:column>
+					<h:commandLink value="Alterar" action="#{cadastroProdutoCtrl.actionAlterar(e)}"/>
+				</h:column>
+				<h:column>
+					<h:commandLink value="Excluir" action="#{cadastroProdutoCtrl.actionExcluir(e)}">
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</h:form>
+</h:body>
+
+</html>
