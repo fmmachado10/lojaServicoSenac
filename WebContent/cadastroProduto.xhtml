@@ -47,15 +47,35 @@
 				<h:inputText value="#{cadastroProdutoCtrl.produto.preco}" />
 
 			</h:panelGrid>
-			
-			<h:commandButton value="Cancelar" action="lista_equipamento"/>
-			<h:commandButton value="Cadastrar" action="#{cadastroProdutoCtrl.actionGravar}"/>
-			
-			<p:commandButton value="Limpar" id="withIcon2" action="#{cadastroProdutoCtrl.limpar}" update="@form"
+			      
+			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroProdutoCtrl.actionGravar}" update="@form"
+            	style="margin-right:20px;" icon="pi pi-save"/>
+			            	                
+			<p:commandButton value="Limpar" id="idLimpar" action="#{cadastroProdutoCtrl.limpar}" update="@form"
                   style="margin-right:20px;" icon="pi pi-save" immediate="true" process="@this"/>
-                  
-			
+            
 		</div>
+		
+		<br/>
+        <br/>
+        <br/>
+        <p:dataTable id="tabelaProduto" var="produto" value="#{cadastroProdutoCtrl.produtos}" selectionMode="single" selection="#{cadastroProdutoCtrl.produtoSelecionado}" rowKey="#{produto}" >
+            <p:ajax event="rowSelect" listener="#{cadastroProdutoCtrl.aoSelecionar}" update="@form" />
+            <p:ajax event="rowUnselect" listener="#{cadastroProdutoCtrl.aoDesselecionar}" update="@form" />
+
+            <p:column headerText="ID">
+                <h:outputText value="#{produto.id}"/>
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="#{produto.nome}"/>
+            </p:column>
+
+          
+        </p:dataTable>
+
+        <br/>
+		
 	</h:form>
 </h:body>
 

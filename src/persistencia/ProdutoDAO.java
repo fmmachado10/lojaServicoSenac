@@ -69,5 +69,12 @@ public class ProdutoDAO implements Serializable {
 		
 		
 	}
+	
+	 public static List<Produto> consultar(){
+		 
+			return null;
+	        
+	    }
+	
 
 }
