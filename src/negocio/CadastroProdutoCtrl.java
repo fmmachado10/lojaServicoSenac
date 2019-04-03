@@ -11,6 +11,8 @@ import persistencia.ProdutoDAO;
 @ManagedBean
 @SessionScoped
 public class CadastroProdutoCtrl {
+	
+	//fabricio
 
 	private final String PAG_LISTA = "listaProduto";
 
