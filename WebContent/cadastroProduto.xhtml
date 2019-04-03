@@ -32,10 +32,11 @@
 
 	<h:form>
 		<div align="center">
-			<h:panelGrid columns="2" id="formularioProduto">
-				<f:facet name="header">
-					<h:outputLabel value="Cadastro de Produto JSF" />
-				</f:facet>
+			
+			<p:panel id="formularioProduto" header="Cadastro de Pessoas" style="margin-bottom:40px">
+            <p:growl id="msgs" sticky="true"/>    
+            
+	            <h:panelGrid columns="2" cellpadding="2">        
 				
    			    <p:outputLabel value="Id:" for="acID"/>
 				<p:autoComplete id="acID" value="#{cadastroProdutoCtrl.produto.id}" readonly="true"/>
@@ -46,7 +47,9 @@
 				<p:outputLabel value="Preço:" for="acPreco"/>
 				<p:autoComplete id="acPreco" value="#{cadastroProdutoCtrl.produto.preco}" readonly="false"/>
 				
-			</h:panelGrid>
+				</h:panelGrid>
+				
+			</p:panel>
 			      
 			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroProdutoCtrl.actionGravar}" update="tabelaProduto formularioProduto"
             	style="margin-right:10px;" icon="pi pi-save"/>
@@ -77,8 +80,10 @@
                 <h:outputText value="#{produto.nome}"/>
             </p:column>
             
-            <p:column headerText="Nome">
-                <h:outputText value="#{produto.preco}"/>
+            <p:column headerText="Preço">
+                <h:outputText value="#{produto.preco}">
+                	<f:convertNumber type="currency" currencySymbol="R$" />
+                </h:outputText>
             </p:column>
 
           
