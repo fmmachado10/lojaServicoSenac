@@ -72,7 +72,17 @@ public class ProdutoDAO implements Serializable {
 	
 	 public static List<Produto> consultar(){
 		 
-			return null;
+		 Session sessao = HibernateUtil.getSesseionfactory().openSession();
+			
+			Query consulta;
+			
+			consulta = sessao.createQuery("from Produto order by pro_nome");
+			
+			List lista = consulta.list();
+			
+			sessao.close();
+			
+			return lista;
 	        
 	    }
 	
