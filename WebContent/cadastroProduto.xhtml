@@ -32,27 +32,33 @@
 
 	<h:form>
 		<div align="center">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" id="formularioProduto">
 				<f:facet name="header">
 					<h:outputLabel value="Cadastro de Produto JSF" />
 				</f:facet>
 				
-				<h:outputLabel value="Id" />
-				<h:inputText readonly="true" value="#{cadastroProdutoCtrl.produto.id}" />
-
-				<h:outputLabel value="Descrição" />
-				<h:inputText value="#{cadastroProdutoCtrl.produto.nome}" />
-
-				<h:outputLabel value="Preço" />
-				<h:inputText value="#{cadastroProdutoCtrl.produto.preco}" />
-
+   			    <p:outputLabel value="Id:" for="acID"/>
+				<p:autoComplete id="acID" value="#{cadastroProdutoCtrl.produto.id}" readonly="true"/>
+				
+				<p:outputLabel value="Nome:" for="acNome"/>
+				<p:autoComplete id="acNome" value="#{cadastroProdutoCtrl.produto.nome}" readonly="false"/>
+				
+				<p:outputLabel value="Preço:" for="acPreco"/>
+				<p:autoComplete id="acPreco" value="#{cadastroProdutoCtrl.produto.preco}" readonly="false"/>
+				
 			</h:panelGrid>
 			      
-			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroProdutoCtrl.actionGravar}" update="@form"
-            	style="margin-right:20px;" icon="pi pi-save"/>
+			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroProdutoCtrl.actionGravar}" update="tabelaProduto formularioProduto"
+            	style="margin-right:10px;" icon="pi pi-save"/>
+            	
+			<p:commandButton value="Editar" id="idEditar" action="#{cadastroProdutoCtrl.actionEditar}" update="tabelaProduto formularioProduto"
+            	style="margin-right:10px;" icon="pi pi-save"/>            	
+            	
+			<p:commandButton value="Excluir" id="idExcluir" action="#{cadastroProdutoCtrl.actionExcluir}" update="tabelaProduto formularioProduto"
+            	style="margin-right:10px;" icon="pi pi-save"/>  				
 			            	                
 			<p:commandButton value="Limpar" id="idLimpar" action="#{cadastroProdutoCtrl.limpar}" update="@form"
-                  style="margin-right:20px;" icon="pi pi-save" immediate="true" process="@this"/>
+                  style="margin-right:10px;" icon="pi pi-save" immediate="true" process="@this"/>
             
 		</div>
 		
@@ -69,6 +75,10 @@
 
             <p:column headerText="Nome">
                 <h:outputText value="#{produto.nome}"/>
+            </p:column>
+            
+            <p:column headerText="Nome">
+                <h:outputText value="#{produto.preco}"/>
             </p:column>
 
           
