@@ -29,6 +29,14 @@
             box-sizing: content-box;
         }
     </style>
+    
+    <p:tabMenu activeIndex="0">
+	
+		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml"  />
+		<p:menuitem value="Cadastro de Servico" url="cadastroServico.xhtml"  />
+		
+		
+	</p:tabMenu>
 
 	<h:form>
 		<div align="center">
@@ -44,8 +52,14 @@
 				<p:outputLabel value="Nome:" for="acNome"/>
 				<p:autoComplete id="acNome" value="#{cadastroServicoCtrl.servico.nome}" readonly="false"/>
 				
-				<p:outputLabel value="Preço:" for="acValor"/>
-				<p:autoComplete id="acPreco" value="#{cadastroServicoCtrl.servico.valor}" readonly="false"/>
+				<p:outputLabel value="Descrição:" for="acDescricao"/>
+				<p:autoComplete id="acDescricao" value="#{cadastroServicoCtrl.servico.descricao}" readonly="false"/>
+				
+				<p:outputLabel value="Unidade:" for="acUnidade"/>
+				<p:autoComplete id="acUnidade" value="#{cadastroServicoCtrl.servico.unidade}" readonly="false"/>
+				
+				<p:outputLabel value="Valor:" for="acValor"/>
+				<p:autoComplete id="acValor" value="#{cadastroServicoCtrl.servico.valor}" readonly="false"/>
 				
 				</h:panelGrid>
 				
@@ -80,7 +94,15 @@
                 <h:outputText value="#{servico.nome}"/>
             </p:column>
             
-            <p:column headerText="Preço">
+            <p:column headerText="Descrição">
+                <h:outputText value="#{servico.descricao}"/>
+            </p:column>
+            
+            <p:column headerText="Unidade">
+                <h:outputText value="#{servico.unidade}"/>
+            </p:column>
+          
+            <p:column headerText="Valor">
                 <h:outputText value="#{servico.valor}">
                 	<f:convertNumber type="currency" currencySymbol="R$" />
                 </h:outputText>

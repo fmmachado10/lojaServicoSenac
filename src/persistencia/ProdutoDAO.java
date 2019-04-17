@@ -85,6 +85,5 @@ public class ProdutoDAO implements Serializable {
 			return lista;
 	        
 	    }
-	
-//fabricio
+
 }

@@ -36,6 +36,7 @@
 
         <!-- Mapeamento das entidades -->        
         <mapping class="bean.Produto" />
+        <mapping class="bean.Servico" />
         
         
 

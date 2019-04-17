@@ -5,9 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import bean.Produto;
 import bean.Servico;
-import persistencia.ProdutoDAO;
 import persistencia.ServicoDAO;
 
 @ManagedBean
