@@ -2,11 +2,14 @@ package bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import enumerador.EnumTipoPessoa;
+import enumerador.EnumTipoPessoa.TipoPessoa;
 
 @Entity
 @Table(name="pessoa")
@@ -44,8 +47,8 @@ public class Pessoa {
 	@Column(name = "pes_email", length=50, nullable=true)
 	private String email;
 	
-	@Column(name = "pes_tipo", length=50, nullable=true)
-	private EnumTipoPessoa tipo;
+	@Enumerated(EnumType.STRING)
+	private TipoPessoa tipo;
 
 	public long getId() {
 		return id;
@@ -127,11 +130,11 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public EnumTipoPessoa getTipo() {
+	public TipoPessoa getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(EnumTipoPessoa tipo) {
+	public void setTipo(TipoPessoa tipo) {
 		this.tipo = tipo;
 	}
 	

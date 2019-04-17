@@ -45,13 +45,11 @@
 			<p:panel id="formularioPessoa" header="Cadastro de Pessoa" style="margin-bottom:40px">
             <p:growl id="msgs" sticky="true"/>    
             
-	            <h:panelGrid columns="4" cellpadding="2">        
+	            <h:panelGrid columns="6" cellpadding="2">        
 				
    			    <p:outputLabel value="Id:" for="acID"/>
 				<p:autoComplete id="acID" value="" readonly="true"/>
-				
-				<p:outputLabel value="" for="acID2"/>
-				<p:autoComplete id="acID2" value="" readonly="true" disabled="true"/>
+				<br />
 				
 				<p:outputLabel value="Nome:" for="acNome"/>
 				<p:autoComplete id="acNome" value="" readonly="false"/>
@@ -65,16 +63,16 @@
 				
 			</p:panel>
 			      
-			<p:commandButton value="Cadastrar" id="idCadastrar" action="" update="tabelaPessoa formularioPessoa"
+			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroPessoaCtrl.actionGravar}" update="tabelaPessoa formularioPessoa"
             	style="margin-right:10px;" icon="pi pi-save"/>
             	
-			<p:commandButton value="Editar" id="idEditar" action="" update="tabelaPessoa formularioPessoa"
+			<p:commandButton value="Editar" id="idEditar" action="#{cadastroPessoaCtrl.actionEditar}" update="tabelaPessoa formularioPessoa"
             	style="margin-right:10px;" icon="pi pi-save"/>            	
             	
-			<p:commandButton value="Excluir" id="idExcluir" action="" update="tabelaPessoa formularioPessoa"
+			<p:commandButton value="Excluir" id="idExcluir" action="#{cadastroPessoaCtrl.actionExcluir}" update="tabelaPessoa formularioPessoa"
             	style="margin-right:10px;" icon="pi pi-save"/>  				
 			            	                
-			<p:commandButton value="Limpar" id="idLimpar" action="" update="@form"
+			<p:commandButton value="Limpar" id="idLimpar" action="#{cadastroPessoaCtrl.limpar}" update="@form"
                   style="margin-right:10px;" icon="pi pi-save" immediate="true" process="@this"/>
             
 		</div>
@@ -83,39 +81,23 @@
         <br/>
         <br/>
         
-<!--         
-        <p:dataTable id="tabelaServico" var="servico" value="#{cadastroServicoCtrl.servicos}" selectionMode="single" selection="#{cadastroServicoCtrl.servicoSelecionado}" rowKey="#{servico}" >
-            <p:ajax event="rowSelect" listener="#{cadastroServicoCtrl.aoSelecionar}" update="@form" />
-            <p:ajax event="rowUnselect" listener="#{cadastroServicoCtrl.aoDesselecionar}" update="@form" />
+         
+        <p:dataTable id="tabelaPessoa" var="pessoa" value="#{cadastroPessoa.pessoas}" selectionMode="single" selection="#{cadastroPessoaCtrl.pessoaSelecionado}" rowKey="#{pessoa}" >
+            <p:ajax event="rowSelect" listener="#{cadastroPessoaCtrl.aoSelecionar}" update="@form" />
+            <p:ajax event="rowUnselect" listener="#{cadastroPessoaCtrl.aoDesselecionar}" update="@form" />
 
             <p:column headerText="ID">
-                <h:outputText value="#{servico.id}"/>
+                <h:outputText value="#{pessoa.id}"/>
             </p:column>
 
-            <p:column headerText="Nome">
-                <h:outputText value="#{servico.nome}"/>
-            </p:column>
-            
-            <p:column headerText="Descrição">
-                <h:outputText value="#{servico.descricao}"/>
-            </p:column>
-            
-            <p:column headerText="Unidade">
-                <h:outputText value="#{servico.unidade}"/>
-            </p:column>
           
-            <p:column headerText="Valor">
-                <h:outputText value="#{servico.valor}">
-                	<f:convertNumber type="currency" currencySymbol="R$" />
-                </h:outputText>
-            </p:column>
 
           
         </p:dataTable>
 
         <br/>
         
--->        
+    
 		
 	</h:form>
 </h:body>
