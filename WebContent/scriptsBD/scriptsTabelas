@@ -1,0 +1,35 @@
+CREATE TABLE `lojaservico`.`pessoa` (
+  `pes_id` INT NOT NULL AUTO_INCREMENT,
+  `pes_nome` VARCHAR(60) NOT NULL,
+  `pes_cpf` CHAR(14) NOT NULL,
+  `pes_rg` VARCHAR(20) NOT NULL,
+  `pes_rua` VARCHAR(60) NOT NULL,
+  `pes_bairro` VARCHAR(30) NOT NULL,
+  `pes_cidade` VARCHAR(30) NOT NULL,
+  `pes_uf` CHAR(2) NOT NULL,
+  `pes_cep` INT NULL,
+  `pes_email` VARCHAR(45) NULL,
+  `pes_senha` VARCHAR(32) NULL,
+  `pes_tipo` VARCHAR(30) NULL,
+  PRIMARY KEY (`pes_id`));
+  
+  ALTER TABLE `lojaservico`.`pessoa` 
+CHANGE COLUMN `pes_cep` `pes_cep` INT(11) NOT NULL ,
+CHANGE COLUMN `pes_email` `pes_email` VARCHAR(45) NOT NULL ,
+CHANGE COLUMN `pes_senha` `pes_senha` VARCHAR(32) NOT NULL ,
+CHANGE COLUMN `pes_tipo` `pes_tipo` VARCHAR(30) NOT NULL ;
+
+
+create table fone
+(
+fon_id	serial	primary key,
+pes_id	integer,
+fon_numero	varchar(20),
+fon_descricao	varchar(30),
+constraint rel_pessoa_fone foreign key (pes_id) references pessoa (pes_id)
+);
+
+
+
+  
+  

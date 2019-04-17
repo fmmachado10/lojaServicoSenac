@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Cadastro de Pessoa</title>
+</h:head>
+<h:body>
+
+	<style type="text/css">
+        .ui-datalist .ui-datalist-content {
+            border: 0 none
+        }
+        .ui-datalist ul {
+            padding: 0px 10px 0 20px;
+            margin: 5px 0;
+        }
+        .value {
+            font-weight: bold;
+        }
+        .ui-autocomplete-itemtip {
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    </style>
+    
+    <p:tabMenu activeIndex="0">
+	
+		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml"  />
+		<p:menuitem value="Cadastro de Servico" url="cadastroServico.xhtml"  />
+		<p:menuitem value="Cadastro de Pessoa" url="cadastroPessoa.xhtml"  />
+		
+		
+	</p:tabMenu>
+
+	<h:form>
+		<div align="center">
+			
+			<p:panel id="formularioPessoa" header="Cadastro de Pessoa" style="margin-bottom:40px">
+            <p:growl id="msgs" sticky="true"/>    
+            
+	            <h:panelGrid columns="4" cellpadding="2">        
+				
+   			    <p:outputLabel value="Id:" for="acID"/>
+				<p:autoComplete id="acID" value="" readonly="true"/>
+				
+				<p:outputLabel value="" for="acID2"/>
+				<p:autoComplete id="acID2" value="" readonly="true" disabled="true"/>
+				
+				<p:outputLabel value="Nome:" for="acNome"/>
+				<p:autoComplete id="acNome" value="" readonly="false"/>
+				
+				<p:outputLabel value="Descrição:" for="acDescricao"/>
+				<p:autoComplete id="acDescricao" value="" readonly="false"/>
+				
+				
+				
+				</h:panelGrid>
+				
+			</p:panel>
+			      
+			<p:commandButton value="Cadastrar" id="idCadastrar" action="" update="tabelaPessoa formularioPessoa"
+            	style="margin-right:10px;" icon="pi pi-save"/>
+            	
+			<p:commandButton value="Editar" id="idEditar" action="" update="tabelaPessoa formularioPessoa"
+            	style="margin-right:10px;" icon="pi pi-save"/>            	
+            	
+			<p:commandButton value="Excluir" id="idExcluir" action="" update="tabelaPessoa formularioPessoa"
+            	style="margin-right:10px;" icon="pi pi-save"/>  				
+			            	                
+			<p:commandButton value="Limpar" id="idLimpar" action="" update="@form"
+                  style="margin-right:10px;" icon="pi pi-save" immediate="true" process="@this"/>
+            
+		</div>
+		
+		<br/>
+        <br/>
+        <br/>
+        
+<!--         
+        <p:dataTable id="tabelaServico" var="servico" value="#{cadastroServicoCtrl.servicos}" selectionMode="single" selection="#{cadastroServicoCtrl.servicoSelecionado}" rowKey="#{servico}" >
+            <p:ajax event="rowSelect" listener="#{cadastroServicoCtrl.aoSelecionar}" update="@form" />
+            <p:ajax event="rowUnselect" listener="#{cadastroServicoCtrl.aoDesselecionar}" update="@form" />
+
+            <p:column headerText="ID">
+                <h:outputText value="#{servico.id}"/>
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="#{servico.nome}"/>
+            </p:column>
+            
+            <p:column headerText="Descrição">
+                <h:outputText value="#{servico.descricao}"/>
+            </p:column>
+            
+            <p:column headerText="Unidade">
+                <h:outputText value="#{servico.unidade}"/>
+            </p:column>
+          
+            <p:column headerText="Valor">
+                <h:outputText value="#{servico.valor}">
+                	<f:convertNumber type="currency" currencySymbol="R$" />
+                </h:outputText>
+            </p:column>
+
+          
+        </p:dataTable>
+
+        <br/>
+        
+-->        
+		
+	</h:form>
+</h:body>
+
+</html>
+
