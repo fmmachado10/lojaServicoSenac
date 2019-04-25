@@ -47,8 +47,12 @@ public class Pessoa {
 	@Column(name = "pes_email", length=50, nullable=true)
 	private String email;
 	
+	@Column(name = "pes_senha", length=50, nullable=true)
+	private String senha;
+
+	@Column(name = "pes_tipo", length=30, nullable=true)
 	@Enumerated(EnumType.STRING)
-	private TipoPessoa tipo;
+	private TipoPessoa tipoPessoa;
 
 	public long getId() {
 		return id;
@@ -130,12 +134,20 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public TipoPessoa getTipo() {
-		return tipo;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setTipo(TipoPessoa tipo) {
-		this.tipo = tipo;
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}	
+	
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
+	}
+	
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
 	}
 	
 	

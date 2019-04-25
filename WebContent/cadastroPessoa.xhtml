@@ -48,41 +48,43 @@
 	            <h:panelGrid columns="8" cellpadding="2">   
 	            
    			    <p:outputLabel value="Id:" for="acID" />
-				<p:autoComplete id="acID" value="" readonly="true" />
+				<p:autoComplete id="acID" value="#{cadastroPessoaCtrl.pessoa.id}" readonly="true" />
 				
 				<p:outputLabel value="Nome:" for="acNome"/>
-				<p:autoComplete id="acNome" value="" readonly="false"/>
+				<p:autoComplete id="acNome" value="#{cadastroPessoaCtrl.pessoa.nome}" readonly="false"/>
 				
 				<p:outputLabel value="Cpf:" for="acCpf"/>
-				<p:autoComplete id="acCpf" value="" readonly="false"/>
+				<p:autoComplete id="acCpf" value="#{cadastroPessoaCtrl.pessoa.cpf}" readonly="false"/>
 				
 				<p:outputLabel value="Rg:" for="acRg"/>
-				<p:autoComplete id="acRg" value="" readonly="false"/>
+				<p:autoComplete id="acRg" value="#{cadastroPessoaCtrl.pessoa.rg}" readonly="false"/>
 				
 				<p:outputLabel value="Rua:" for="acRua"/>
-				<p:autoComplete id="acRua" value="" readonly="false"/>
+				<p:autoComplete id="acRua" value="#{cadastroPessoaCtrl.pessoa.rua}" readonly="false"/>
 				
 				<p:outputLabel value="Bairro:" for="acBairro"/>
-				<p:autoComplete id="acBairro" value="" readonly="false"/>
+				<p:autoComplete id="acBairro" value="#{cadastroPessoaCtrl.pessoa.bairro}" readonly="false"/>
 				
 				<p:outputLabel value="Cidade:" for="acCidade"/>
-				<p:autoComplete id="acCidade" value="" readonly="false"/>
+				<p:autoComplete id="acCidade" value="#{cadastroPessoaCtrl.pessoa.cidade}" readonly="false"/>
 				
 				<p:outputLabel value="Uf" for="acUf"/>
-				<p:autoComplete id="acUf" value="" readonly="false"/>
+				<p:autoComplete id="acUf" value="#{cadastroPessoaCtrl.pessoa.uf}" readonly="false"/>
 				
 				<p:outputLabel value="Cep:" for="acCep"/>
-				<p:autoComplete id="acCep" value="" readonly="false"/>
+				<p:autoComplete id="acCep" value="#{cadastroPessoaCtrl.pessoa.cep}" readonly="false"/>
 				
 				<p:outputLabel value="Email" for="acEmail"/>
-				<p:autoComplete id="acEmail" value="" readonly="false"/>
+				<p:autoComplete id="acEmail" value="#{cadastroPessoaCtrl.pessoa.email}" readonly="false"/>
+				
+				<p:outputLabel value="Senha" for="acSenha"/>
+				<p:autoComplete id="acSenha" value="#{cadastroPessoaCtrl.pessoa.senha}" readonly="false"/>
 				
 				<p:outputLabel value="Tipo Pessoa" for="acTipoPessoa"/>
-				<p:selectOneMenu id="acTipoPessoa" value="" >
-            		<f:selectItem itemLabel="Selecione" itemValue="" />
-            		<f:selectItem itemLabel="Cliente" itemValue="1" />  
-            		<f:selectItem itemLabel="Administrador" itemValue="2" /> 
-        		</p:selectOneMenu>
+        		<h:selectOneMenu value="#{cadastroPessoaCtrl.pessoa.tipoPessoa}" id="acTipoPessoa">
+    				<f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+    				<f:selectItems itemLabel="#{cadastroPessoaCtrl.pessoa.tipoPessoa}" value="#{cadastroPessoaCtrl.tipoPessoa}" />
+				</h:selectOneMenu>
 				
 				
 				</h:panelGrid>
@@ -116,9 +118,10 @@
                 <h:outputText value="#{pessoa.id}"/>
             </p:column>
 
-          
-
-          
+            <p:column headerText="Nome">
+                <h:outputText value="#{pessoa.nome}"/>
+            </p:column>
+            
         </p:dataTable>
 
         <br/>

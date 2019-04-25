@@ -7,6 +7,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import bean.Pessoa;
+import enumerador.EnumTipoPessoa.TipoPessoa;
 import persistencia.PessoaDAO;
 
 @ManagedBean
@@ -15,9 +16,11 @@ public class CadastroPessoaCtrl {
 
 	private Pessoa pessoa;
 
-	private List<Pessoa> pessoas; 
-	
+	private List<Pessoa> pessoas;
+
 	private Pessoa pessoaSelecionado;
+	
+	private TipoPessoa tipoPessoa;	
 
 	public Pessoa getPessoa() {
 
@@ -83,7 +86,6 @@ public class CadastroPessoaCtrl {
 
 	}
 
-
 	public void limpar() {
 
 		this.pessoa = new Pessoa();
@@ -111,7 +113,7 @@ public class CadastroPessoaCtrl {
 		return pessoas;
 	}
 
-	public void setServicos(List<Pessoa> pessoas) {
+	public void setPessoass(List<Pessoa> pessoas) {
 
 		this.pessoas = pessoas;
 
@@ -123,10 +125,19 @@ public class CadastroPessoaCtrl {
 
 	}
 
-	public void setServicoSelecionado(Pessoa pessoaSelecionado) {
+	public void setPessoaSelecionado(Pessoa pessoaSelecionado) {
 
 		this.pessoaSelecionado = pessoaSelecionado;
 
 	}
+
+	public TipoPessoa[] getTipoPessoa() {
+		
+		return TipoPessoa.values();
+		
+	}
+	
+	
+	
 
 }
