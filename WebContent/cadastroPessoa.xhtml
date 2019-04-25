@@ -45,22 +45,44 @@
 			<p:panel id="formularioPessoa" header="Cadastro de Pessoa" style="margin-bottom:40px">
             <p:growl id="msgs" sticky="true"/>    
             
-	            <h:panelGrid columns="6" cellpadding="2">        
-				
-   			    <p:outputLabel value="Id:" for="acID"/>
-				<p:autoComplete id="acID" value="" readonly="true"/>
-				
-				
-				
-				
-				
+	            <h:panelGrid columns="8" cellpadding="2">   
+	            
+   			    <p:outputLabel value="Id:" for="acID" />
+				<p:autoComplete id="acID" value="" readonly="true" />
 				
 				<p:outputLabel value="Nome:" for="acNome"/>
 				<p:autoComplete id="acNome" value="" readonly="false"/>
 				
-				<p:outputLabel value="Descrição:" for="acDescricao"/>
-				<p:autoComplete id="acDescricao" value="" readonly="false"/>
+				<p:outputLabel value="Cpf:" for="acCpf"/>
+				<p:autoComplete id="acCpf" value="" readonly="false"/>
 				
+				<p:outputLabel value="Rg:" for="acRg"/>
+				<p:autoComplete id="acRg" value="" readonly="false"/>
+				
+				<p:outputLabel value="Rua:" for="acRua"/>
+				<p:autoComplete id="acRua" value="" readonly="false"/>
+				
+				<p:outputLabel value="Bairro:" for="acBairro"/>
+				<p:autoComplete id="acBairro" value="" readonly="false"/>
+				
+				<p:outputLabel value="Cidade:" for="acCidade"/>
+				<p:autoComplete id="acCidade" value="" readonly="false"/>
+				
+				<p:outputLabel value="Uf" for="acUf"/>
+				<p:autoComplete id="acUf" value="" readonly="false"/>
+				
+				<p:outputLabel value="Cep:" for="acCep"/>
+				<p:autoComplete id="acCep" value="" readonly="false"/>
+				
+				<p:outputLabel value="Email" for="acEmail"/>
+				<p:autoComplete id="acEmail" value="" readonly="false"/>
+				
+				<p:outputLabel value="Tipo Pessoa" for="acTipoPessoa"/>
+				<p:selectOneMenu id="acTipoPessoa" value="" >
+            		<f:selectItem itemLabel="Selecione" itemValue="" />
+            		<f:selectItem itemLabel="Cliente" itemValue="1" />  
+            		<f:selectItem itemLabel="Administrador" itemValue="2" /> 
+        		</p:selectOneMenu>
 				
 				
 				</h:panelGrid>
