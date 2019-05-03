@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context reloadable="true">
-	<Resource 	name="jdbc/hibernatedb" 
+	<Resource 	name="jdbc/lojaservico" 
 			auth="Container" 
 			type="javax.sql.DataSource"
 			maxActive="100" 
 			maxIdle="30" 
 			maxWait="10000"
-			username="postgres" 
-			password="123" 
-			driverClassName="org.postgresql.Driver"
-			url="jdbc:postgresql://localhost:5432/hibernatedb?autoReconnect=true"/>
+			username="root" 
+			password="admin" 
+			driverClassName="com.mysql.cj.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/lojaservico?useSSL=false&amp;useTimezone=true&amp;serverTimezone=UTC"/>
 </Context>
