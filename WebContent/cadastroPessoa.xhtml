@@ -79,13 +79,12 @@
 				
 				<p:outputLabel value="Senha" for="acSenha"/>
 				<p:autoComplete id="acSenha" value="#{cadastroPessoaCtrl.pessoa.senha}" readonly="false"/>
-				
+									
 				<p:outputLabel value="Tipo Pessoa" for="acTipoPessoa"/>
         		<h:selectOneMenu value="#{cadastroPessoaCtrl.pessoa.tipoPessoa}" id="acTipoPessoa">
     				<f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
     				<f:selectItems itemLabel="#{cadastroPessoaCtrl.pessoa.tipoPessoa}" value="#{cadastroPessoaCtrl.tipoPessoa}" />
 				</h:selectOneMenu>
-				
 				
 				</h:panelGrid>
 				
@@ -110,7 +109,7 @@
         <br/>
         
          
-        <p:dataTable id="tabelaPessoa" var="pessoa" value="#{cadastroPessoa.pessoas}" selectionMode="single" selection="#{cadastroPessoaCtrl.pessoaSelecionado}" rowKey="#{pessoa}" >
+        <p:dataTable id="tabelaPessoa" var="pessoa" value="#{cadastroPessoaCtrl.pessoas}" selectionMode="single" selection="#{cadastroPessoaCtrl.pessoaSelecionado}" rowKey="#{pessoa}" >
             <p:ajax event="rowSelect" listener="#{cadastroPessoaCtrl.aoSelecionar}" update="@form" />
             <p:ajax event="rowUnselect" listener="#{cadastroPessoaCtrl.aoDesselecionar}" update="@form" />
 
@@ -122,6 +121,23 @@
                 <h:outputText value="#{pessoa.nome}"/>
             </p:column>
             
+            <p:column headerText="Cpf">
+                <h:outputText value="#{pessoa.cpf}"/>
+            </p:column>
+            
+            <p:column headerText="Rg">
+                <h:outputText value="#{pessoa.rg}"/>
+            </p:column>
+         
+         	<p:column headerText="Email">
+                <h:outputText value="#{pessoa.email}"/>
+            </p:column>
+            
+            <p:column headerText="Tipo Pessoa">
+                <h:outputText value="#{pessoa.tipoPessoa}"/>
+            </p:column>
+         
+          
         </p:dataTable>
 
         <br/>
