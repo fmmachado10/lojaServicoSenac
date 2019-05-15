@@ -18,6 +18,7 @@ public class CadastroPessoaCtrl {
 
 	private Pessoa pessoaSelecionado;
 
+	@SuppressWarnings("unused")
 	private TipoPessoa tipoPessoa;
 
 	public Pessoa getPessoa() {
@@ -49,10 +50,14 @@ public class CadastroPessoaCtrl {
 		if (pessoa.getId() == 0) {
 
 			PessoaDAO.inserir(pessoa);
+			
+			limpar();
 
 		} else {
 
 			PessoaDAO.alterar(pessoa);
+			
+			limpar();
 
 		}
 
@@ -84,17 +89,12 @@ public class CadastroPessoaCtrl {
 
 	}
 
-	public List<Pessoa> getPesquisar() {
-
-		// return EquipamentoDao.pesquisar();
-
-		return null;
-
-	}
 
 	public void limpar() {
 
 		this.pessoa = new Pessoa();
+		
+		setTipoPessoa(null);
 
 		this.pessoas = PessoaDAO.consultar();
 
@@ -142,5 +142,12 @@ public class CadastroPessoaCtrl {
 		return TipoPessoa.values();
 
 	}
+	
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		
+		this.tipoPessoa = tipoPessoa;
+		
+	}
 
+	
 }

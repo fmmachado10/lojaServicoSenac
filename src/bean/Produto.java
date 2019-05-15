@@ -22,6 +22,17 @@ public class Produto {
 	
 	@Column(name = "pro_preco", nullable=true)
 	private Float preco;
+	
+	
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
+
+	private String imagemProduto;
 
 	public long getId() {
 		return id;
