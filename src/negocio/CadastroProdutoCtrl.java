@@ -1,24 +1,37 @@
 package negocio;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import bean.Arquivo;
 import bean.Produto;
 import persistencia.ProdutoDAO;
+import util.AjudanteContextoFaces;
 
 @ManagedBean
 @SessionScoped
 public class CadastroProdutoCtrl {
+	
+	private static final int BUFFER_SIZE = 6124;
+	
+	private static final String LOCAL_HOST = "localhost";
 
 	private Produto produto;
 
@@ -29,6 +42,12 @@ public class CadastroProdutoCtrl {
 	private UploadedFile file;
 
 	private String nomeDoArquivo;
+	
+	private String tipoArquivo;
+	
+	private List<SelectItem> lstTipoArquivo;
+	
+	private List<Arquivo> listaArquivo;
 
 	public Produto getProduto() {
 
@@ -149,35 +168,72 @@ public class CadastroProdutoCtrl {
 
 		this.file = file;
 
+	}	
+	
+	public String getNomeDoArquivo() {
+		
+		return nomeDoArquivo;
+		
 	}
 
-	public void handleFileUpload(FileUploadEvent event) {
-
-		System.out.println("Chamou ... ********************");
-
-		UploadedFile file = event.getFile();
-
+	public void setNomeDoArquivo(String nomeDoArquivo) {
+		
+		this.nomeDoArquivo = nomeDoArquivo;
+		
 	}
 
-	public void carregarArquivo(FileUploadEvent event) throws FileNotFoundException, IOException {
+	public String getTipoArquivo() {
+		
+		return tipoArquivo;
+		
+	}
 
-		FacesMessage msg = new FacesMessage("Sucesso " + event.getFile().getFileName() + " foi carregado.",
-				event.getFile().getFileName() + " foi carregado.");
+	public void setTipoArquivo(String tipoArquivo) {
+		
+		this.tipoArquivo = tipoArquivo;
+		
+	}
 
-		nomeDoArquivo = event.getFile().getFileName(); // pego o nome do arquivo
+	public void setLstTipoArquivo(List<SelectItem> lstTipoArquivo) {
+		
+		this.lstTipoArquivo = lstTipoArquivo;
+		
+	}
+	
+	public List<Arquivo> getLstArquivosSelecao() {
+		
+		if (listaArquivo == null) {
+			
+			listaArquivo = new ArrayList<Arquivo>();
+			
+		}
+		
+		return listaArquivo;
+		
+	}
+	
+	public List<SelectItem> getLstTipoArquivo() {
+		
+		if (lstTipoArquivo == null) {
+			
+			lstTipoArquivo = new ArrayList<SelectItem>();
+			
+			lstTipoArquivo.add(new SelectItem(null, "Selecione um Tipo de Arquivo"));
+			
+		}
+		
+		return lstTipoArquivo;
+		
+	}	
 
-		String caminho = FacesContext.getCurrentInstance().getExternalContext()
-				.getRealPath("\\fotos\\" + nomeDoArquivo); // diretorio o qual vou salvar o arquivo do upload, equivale
-															// ao nome completamente qualificado
+	public List<Arquivo> getListaArquivo() {
+		
+		return listaArquivo;
+		
+	}
 
-		byte[] conteudo = event.getFile().getContents(); // daqui pra baixo é somente operações de IO.
-
-		FileOutputStream fos = new FileOutputStream(caminho);
-
-		fos.write(conteudo);
-
-		fos.close();
-
+	public void setListaArquivo(List<Arquivo> listaArquivo) {
+		this.listaArquivo = listaArquivo;
 	}
 
 	public void doUpload(FileUploadEvent fileUploadEvent) { 
@@ -193,7 +249,116 @@ public class CadastroProdutoCtrl {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         
         facesContext.addMessage(null, new FacesMessage("Sucesso", infoAboutFile));
-        
+            
 	}
+	
+	
+	public void uploadArquivoSelecao(FileUploadEvent fileUploadEvent) { 
+		
+		File fileDestination = null;
+		
+		String caminhoArquivo = "";
+		
+		String nomeArquivo = "";
+		
+		Calendar calendar = Calendar.getInstance();
+
+		String extensaoArquivo = fileUploadEvent.getFile().getFileName().substring(fileUploadEvent.getFile().getFileName().lastIndexOf('.'));
+		
+		String nomeArquivoFileUploadEvent = fileUploadEvent.getFile().getFileName().substring(0, fileUploadEvent.getFile().getFileName().indexOf('.')) + "_" + calendar.getTimeInMillis();
+
+		try {
+			
+			nomeArquivo = (new String(nomeArquivoFileUploadEvent.getBytes(), "ISO-8859-1")); 
+			
+		} catch (UnsupportedEncodingException e1) {
+			
+			e1.printStackTrace();
+			
+		}
+
+		if (getServerName().equals(LOCAL_HOST)) {
+			
+			caminhoArquivo = "C:\\temp\\arquivosTemp\\";
+			
+			fileDestination = new File("c:\\temp\\arquivosTemp\\");
+			
+		} else {
+			
+			caminhoArquivo = "/apps/tcm/temp/";
+			
+			fileDestination = new File("/apps/tcm/temp/");
+			
+		}
+
+		if (caminhoArquivo != null && !caminhoArquivo.equals("")) {
+			
+			caminhoArquivo = caminhoArquivo + nomeArquivo + extensaoArquivo;
+			
+		}
+
+		System.out.println(caminhoArquivo);
+
+		if (!fileDestination.exists()) {
+			
+			fileDestination.mkdir();
+			
+		}
+
+		Arquivo arquivo = new Arquivo();		
+		arquivo.setNomeArquivo(nomeArquivoFileUploadEvent);		
+		arquivo.setSufixo(extensaoArquivo);
+		arquivo.setTipoArquivo(tipoArquivo);
+		arquivo.setCaminhoArquivo(caminhoArquivo);
+
+		File result = new File(caminhoArquivo);
+
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream(result);
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+
+			int bulk;
+			InputStream inputStream = fileUploadEvent.getFile().getInputstream();
+			while (true) {
+				bulk = inputStream.read(buffer);
+				if (bulk < 0) {
+					break;
+				}
+				fileOutputStream.write(buffer, 0, bulk);
+				fileOutputStream.flush();
+			}
+
+			fileOutputStream.close();
+			inputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		getLstArquivosSelecao().add(arquivo);
+		
+		
+
+		/*
+		for (SelectItem i : lstTipoArquivo) {
+			if (i.getValue() != null && i.getValue().equals(getTipoArquivo())) {
+				lstTipoArquivo.remove(i);
+				setTipoArquivo(null);
+				break;
+			}
+		}
+		*/
+		
+	}
+	
+	public String getServerName() {
+		
+		HttpServletRequest request = (HttpServletRequest) AjudanteContextoFaces.getFacesContext().getExternalContext().getRequest();
+		
+		return request.getServerName();
+		
+	}
+	
+
 
 }
