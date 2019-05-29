@@ -67,12 +67,7 @@ public class CadastroProdutoCtrl {
 		produtos = ProdutoDAO.consultar();
 
 	}
-
-	public void setEquipamento(Produto produto) {
-
-		this.produto = produto;
-
-	}
+	
 
 	public void actionGravar() {
 

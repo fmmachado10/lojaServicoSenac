@@ -8,11 +8,15 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Seja Bem vindo!</title>
+	<title>Seja Bem vindo! Veja nosso catálogo de Produtos</title>
 </h:head>
 
 <h:body>
 
+	<h1
+		style="font-family: monospace; background-color: silver; color: navy; text-align: center;">Veja nosso catálogo de Produtos</h1>
+
+	<!-- 
 	<p:tabMenu activeIndex="0">
 
 		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml" />
@@ -26,34 +30,39 @@
 
 
 	</p:tabMenu>
+-->
 
 	<h:form>
-		<table cellpadding="1" cellspacing="1" border="1" width="1200px">
-			<tr>
-				<td colspan="1" style="width: 200px">xxx</td>
-				<td colspan="4" style="width: 800px">xxx</td>
-				<td colspan="1" style="width: 200px">xxx</td>
 
-			</tr>
-		</table>
+		<p:panel header="Catálogo de Produtos">
 
-		<p:dataTable id="tabelaProduto" var="produto"
-			value="#{indexCtrl.produtos}" selectionMode="single"
-			selection="#{indexCtrl.produtoSelecionado}" rowKey="#{produto}">
-			<p:ajax event="rowSelect" listener="#{indexCtrl.aoSelecionar}"
-				update="@form" />
-			<p:ajax event="rowUnselect" listener="#{indexCtrl.aoDesselecionar}"
-				update="@form" />
+			<p:dataTable value="#{indexCtrl.produtos}" id="tabelaProduto"
+				var="produto">
 
-			<p:column headerText="ID">
-				<h:outputText value="#{produto.id}" />
-			</p:column>
+				<p:column headerText="ID" style="width:20px" >
+					<h:outputText value="#{produto.id}" />
+				</p:column>
+				
+				<p:column headerText="Caminho">
+					<h:outputText value="#{produto.caminhoImagem}" />
+				</p:column>
+				
+				<p:column headerText="Imagem03" style="text-align: center">
+        			<h:graphicImage name="imagens/download.png" height="80" width="80" style="margin-top: 4px;"/>
+				</p:column>
+				
+				<p:column headerText="Nome">
+					<h:outputText value="#{produto.nome}" />
+				</p:column>
+				
+				<p:column headerText="Adicionar no Carrinho">
+					<p:commandLink value="Add no meu carrinho" action="#{indexCtrl.adicionarCarrinho}" />
+				</p:column>
 
-			<p:column headerText="Nome">
-				<h:outputText value="#{pessoa.nome}" />
-			</p:column>
+			</p:dataTable>
 
-		</p:dataTable>
+		</p:panel>
+		
 	</h:form>
 
 </h:body>
