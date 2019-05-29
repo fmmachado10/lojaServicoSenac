@@ -1,15 +1,10 @@
 package bean;
 
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,19 +20,8 @@ public class Produto {
 	private String nome;
 	
 	@Column(name = "pro_preco", nullable=true)
-	private Float preco;
+	private Float preco;		
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "arquivo")
-	private List<Arquivo> listaArquivo;
-	
-	public List<Arquivo> getListaArquivo() {
-		return listaArquivo;
-	}
-
-	public void setListaArquivo(List<Arquivo> listaArquivo) {
-		this.listaArquivo = listaArquivo;
-	}
-
 	public long getId() {
 		return id;
 	}

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.springframework.beans.factory.support.ReplaceOverride;
 
 import bean.Arquivo;
 import bean.Produto;
@@ -76,9 +77,9 @@ public class CadastroProdutoCtrl {
 	public void actionGravar() {
 
 		if (produto.getId() == 0) {
-
+			
 			ProdutoDAO.inserir(produto);
-
+			
 		} else {
 
 			ProdutoDAO.alterar(produto);
@@ -118,6 +119,8 @@ public class CadastroProdutoCtrl {
 		this.produto = new Produto();
 
 		this.produtos = ProdutoDAO.consultar();
+		
+		setListaArquivo(new ArrayList<Arquivo>());
 
 		System.out.println("limpando...");
 
@@ -235,23 +238,6 @@ public class CadastroProdutoCtrl {
 	public void setListaArquivo(List<Arquivo> listaArquivo) {
 		this.listaArquivo = listaArquivo;
 	}
-
-	public void doUpload(FileUploadEvent fileUploadEvent) { 
-		
-        UploadedFile uploadedFile = fileUploadEvent.getFile();  
-        
-        String fileNameUploaded = uploadedFile.getFileName(); 
-        
-        long fileSizeUploaded = uploadedFile.getSize(); 
-        
-        String infoAboutFile = "<br/> Arquivo recebido: <b>" + fileNameUploaded + "</b><br/>" + "Tamanho do Arquivo: <b>"+fileSizeUploaded + "</b>";
-        
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        
-        facesContext.addMessage(null, new FacesMessage("Sucesso", infoAboutFile));
-            
-	}
-	
 	
 	public void uploadArquivoSelecao(FileUploadEvent fileUploadEvent) { 
 		
@@ -265,7 +251,11 @@ public class CadastroProdutoCtrl {
 
 		String extensaoArquivo = fileUploadEvent.getFile().getFileName().substring(fileUploadEvent.getFile().getFileName().lastIndexOf('.'));
 		
-		String nomeArquivoFileUploadEvent = fileUploadEvent.getFile().getFileName().substring(0, fileUploadEvent.getFile().getFileName().indexOf('.')) + "_" + calendar.getTimeInMillis();
+		String nomeDoProduto = getProduto().getNome();
+		
+		nomeDoProduto = nomeDoProduto.replace(" ", "") + "_"; 
+		
+		String nomeArquivoFileUploadEvent = nomeDoProduto +  fileUploadEvent.getFile().getFileName().substring(0, fileUploadEvent.getFile().getFileName().indexOf('.')) + "_" + calendar.getTimeInMillis();
 
 		try {
 			
@@ -306,9 +296,7 @@ public class CadastroProdutoCtrl {
 		}
 
 		Arquivo arquivo = new Arquivo();		
-		arquivo.setNomeArquivo(nomeArquivoFileUploadEvent);		
-		arquivo.setSufixo(extensaoArquivo);
-		arquivo.setTipoArquivo(tipoArquivo);
+		arquivo.setNomeArquivo(nomeArquivoFileUploadEvent);	
 		arquivo.setCaminhoArquivo(caminhoArquivo);
 
 		File result = new File(caminhoArquivo);
@@ -338,7 +326,6 @@ public class CadastroProdutoCtrl {
 		getLstArquivosSelecao().add(arquivo);
 		
 		
-
 		/*
 		for (SelectItem i : lstTipoArquivo) {
 			if (i.getValue() != null && i.getValue().equals(getTipoArquivo())) {

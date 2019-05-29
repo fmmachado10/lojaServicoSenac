@@ -11,21 +11,50 @@
 	<title>Seja Bem vindo!</title>
 </h:head>
 
-<h:body>	
-	
+<h:body>
+
 	<p:tabMenu activeIndex="0">
-	
-		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml"  />
-		<p:menuitem value="Cadastro de Serviço" url="cadastroServico.xhtml"  />
-		<p:menuitem value="Cadastro de Pessoa" url="cadastroPessoa.xhtml"  />
-		
-		<p:menuitem value="Acessar Área do Cliente" url="cliente/principal.xhtml"  />
-		<p:menuitem value="Acessar Área do Administrador" url="adm/principal.xhtml"  />
-		
-		
+
+		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml" />
+		<p:menuitem value="Cadastro de Serviço" url="cadastroServico.xhtml" />
+		<p:menuitem value="Cadastro de Pessoa" url="cadastroPessoa.xhtml" />
+
+		<p:menuitem value="Acessar Área do Cliente"
+			url="cliente/principal.xhtml" />
+		<p:menuitem value="Acessar Área do Administrador"
+			url="adm/principal.xhtml" />
+
+
 	</p:tabMenu>
 
+	<h:form>
+		<table cellpadding="1" cellspacing="1" border="1" width="1200px">
+			<tr>
+				<td colspan="1" style="width: 200px">xxx</td>
+				<td colspan="4" style="width: 800px">xxx</td>
+				<td colspan="1" style="width: 200px">xxx</td>
 
+			</tr>
+		</table>
+
+		<p:dataTable id="tabelaProduto" var="produto"
+			value="#{indexCtrl.produtos}" selectionMode="single"
+			selection="#{indexCtrl.produtoSelecionado}" rowKey="#{produto}">
+			<p:ajax event="rowSelect" listener="#{indexCtrl.aoSelecionar}"
+				update="@form" />
+			<p:ajax event="rowUnselect" listener="#{indexCtrl.aoDesselecionar}"
+				update="@form" />
+
+			<p:column headerText="ID">
+				<h:outputText value="#{produto.id}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{pessoa.nome}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 
 </h:body>
 
