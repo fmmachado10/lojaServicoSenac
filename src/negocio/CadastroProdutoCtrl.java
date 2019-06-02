@@ -1,7 +1,6 @@
 package negocio;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,16 +9,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-import org.springframework.beans.factory.support.ReplaceOverride;
 
 import bean.Arquivo;
 import bean.Produto;
@@ -33,6 +29,10 @@ public class CadastroProdutoCtrl {
 	private static final int BUFFER_SIZE = 6124;
 	
 	private static final String LOCAL_HOST = "localhost";
+	
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
+	
+	private static final String CAMINHO_IMAGEM = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
 
 	private Produto produto;
 
@@ -264,15 +264,15 @@ public class CadastroProdutoCtrl {
 
 		if (getServerName().equals(LOCAL_HOST)) {
 			
-			caminhoArquivo = "C:\\temp\\arquivosTemp\\";
+			caminhoArquivo = CAMINHO_IMAGEM_LOCALHOST;
 			
-			fileDestination = new File("c:\\temp\\arquivosTemp\\");
+			fileDestination = new File(CAMINHO_IMAGEM_LOCALHOST);
 			
 		} else {
 			
-			caminhoArquivo = "/apps/tcm/temp/";
+			caminhoArquivo = CAMINHO_IMAGEM;
 			
-			fileDestination = new File("/apps/tcm/temp/");
+			fileDestination = new File(CAMINHO_IMAGEM);
 			
 		}
 
@@ -290,8 +290,10 @@ public class CadastroProdutoCtrl {
 			
 		}
 
-		Arquivo arquivo = new Arquivo();		
+		Arquivo arquivo = new Arquivo();	
+		
 		arquivo.setNomeArquivo(nomeArquivoFileUploadEvent);	
+		
 		arquivo.setCaminhoArquivo(caminhoArquivo);
 
 		File result = new File(caminhoArquivo);
@@ -302,20 +304,32 @@ public class CadastroProdutoCtrl {
 			byte[] buffer = new byte[BUFFER_SIZE];
 
 			int bulk;
+			
 			InputStream inputStream = fileUploadEvent.getFile().getInputstream();
+			
 			while (true) {
+				
 				bulk = inputStream.read(buffer);
+				
 				if (bulk < 0) {
+					
 					break;
+					
 				}
+				
 				fileOutputStream.write(buffer, 0, bulk);
+				
 				fileOutputStream.flush();
 			}
 
 			fileOutputStream.close();
+			
 			inputStream.close();
+			
 		} catch (IOException e) {
+			
 			e.printStackTrace();
+			
 		}
 
 		getLstArquivosSelecao().add(arquivo);

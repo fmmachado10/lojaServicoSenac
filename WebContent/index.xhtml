@@ -14,7 +14,8 @@
 <h:body>
 
 	<h1
-		style="font-family: monospace; background-color: silver; color: navy; text-align: center;">Veja nosso catálogo de Produtos</h1>
+		style="font-family: monospace; background-color: silver; color: #424242; text-align: center;">Veja
+		nosso catálogo de Produtos</h1>
 
 	<!-- 
 	<p:tabMenu activeIndex="0">
@@ -36,33 +37,48 @@
 
 		<p:panel header="Catálogo de Produtos">
 
-			<p:dataTable value="#{indexCtrl.produtos}" id="tabelaProduto"
-				var="produto">
+			<p:dataTable value="#{indexCtrl.produtos}" id="tabelaProduto" var="produto" paginator="true" rows="4">
 
-				<p:column headerText="ID" style="width:20px" >
+				<p:column headerText="ID" style="width:20px">
 					<h:outputText value="#{produto.id}" />
 				</p:column>
-				
+<!-- 				
 				<p:column headerText="Caminho">
 					<h:outputText value="#{produto.caminhoImagem}" />
 				</p:column>
-				
-				<p:column headerText="Imagem03" style="text-align: center">
-        			<h:graphicImage name="imagens/download.png" height="80" width="80" style="margin-top: 4px;"/>
+-->
+				<p:column headerText="Produto" style="text-align: center">
+					<h:graphicImage name="/imagens/#{produto.caminhoImagem}"
+						height="80" width="80" />
 				</p:column>
-				
+
 				<p:column headerText="Nome">
 					<h:outputText value="#{produto.nome}" />
 				</p:column>
-				
+
+				<p:column headerText="Preço">
+					<h:outputText value="#{produto.preco}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+				</p:column>
+
 				<p:column headerText="Adicionar no Carrinho">
-					<p:commandLink value="Add no meu carrinho" action="#{indexCtrl.adicionarCarrinho}" />
+					<p:commandLink value="Add no meu carrinho"
+						action="#{indexCtrl.adicionarCarrinho}" />
 				</p:column>
 
 			</p:dataTable>
 
 		</p:panel>
-		
+
+		<br />
+
+		<div align="right" style="horizontal-align: center;">
+			<p:commandButton value="Finalizar Compra" id="idFinalizar"
+				action="#{indexCtrl.finalizarCompra}" update="tabelaProduto"
+				icon="pi pi-save" />
+		</div>
+
 	</h:form>
 
 </h:body>

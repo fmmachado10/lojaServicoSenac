@@ -1,15 +1,10 @@
 package negocio;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +14,12 @@ import persistencia.ProdutoDAO;
 import util.AjudanteContextoFaces;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class IndexCtrl {
 
 	private static final String LOCAL_HOST = "localhost";
 
-	private static final String CAMINHO_LOCALHOST = "C:\\temp\\arquivosTemp";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
 
 	private Produto produto;
 
@@ -40,7 +35,8 @@ public class IndexCtrl {
 
 		produtos = ProdutoDAO.consultar();
 
-		produtos = buscarImagensProdutos(produtos);
+		produtos = buscarImagensProdutos(produtos);		
+		
 
 	}
 
@@ -68,7 +64,7 @@ public class IndexCtrl {
 
 		if (getServerName().equals(LOCAL_HOST)) {
 
-			return CAMINHO_LOCALHOST;
+			return CAMINHO_IMAGEM_LOCALHOST;
 
 		} else {
 
@@ -92,7 +88,7 @@ public class IndexCtrl {
 
 	public String buscaArquivo(String palavra) {
 
-		File file = new File(CAMINHO_LOCALHOST);
+		File file = new File(CAMINHO_IMAGEM_LOCALHOST);
 
 		File afile[] = file.listFiles();
 
@@ -102,7 +98,7 @@ public class IndexCtrl {
 
 			if (afile[i].getName().startsWith(palavra)) {
 
-				return CAMINHO_LOCALHOST + File.separator + afile[i].getName();
+				return afile[i].getName();
 
 			} 
 		}
