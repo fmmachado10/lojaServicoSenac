@@ -15,7 +15,7 @@ public class CarrinhoCtrl {
 	private List<Produto> produtos; 
 	
 	
-	
+/*	
 	public CarrinhoCtrl() {
 
 		if (produto == null) {
@@ -27,7 +27,7 @@ public class CarrinhoCtrl {
 		produtos = ProdutoDAO.consultar();
 
 	}
-		
+*/		
 	
 	
 	public Produto getProduto(long id) {
@@ -47,6 +47,7 @@ public class CarrinhoCtrl {
 		
 	}
 	
+	/*
 	public void adiciona(Produto p) {
 		
 		if (getProduto(p.getId()) == null) {
@@ -58,5 +59,7 @@ public class CarrinhoCtrl {
 	
 	}
 	
-
+*/
+	
+	
 }

@@ -40,9 +40,10 @@
         <!-- Mapeamento das entidades -->        
         <mapping class="bean.Produto" />
         <mapping class="bean.Servico" />
-        <mapping class="bean.Pessoa" />
-        <mapping class="bean.Arquivo" />
-        
+        <mapping class="bean.Pessoa" />        
+        <mapping class="bean.Pedido" />
+        <mapping class="bean.ItensPedido" />
+        <mapping class="bean.FormaPagamento" />
         
 
     </session-factory>

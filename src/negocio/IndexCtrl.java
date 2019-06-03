@@ -19,7 +19,7 @@ public class IndexCtrl {
 
 	private static final String LOCAL_HOST = "localhost";
 
-	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
 
 	private Produto produto;
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Cadastro de Forma de Pagamento</title>
+</h:head>
+<h:body>
+
+	<style type="text/css">
+        .ui-datalist .ui-datalist-content {
+            border: 0 none
+        }
+        .ui-datalist ul {
+            padding: 0px 10px 0 20px;
+            margin: 5px 0;
+        }
+        .value {
+            font-weight: bold;
+        }
+        .ui-autocomplete-itemtip {
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    </style>
+    
+    <p:tabMenu activeIndex="0">
+	
+		<p:menuitem value="Cadastro de Produto" url="cadastroProduto.xhtml"  />
+		<p:menuitem value="Cadastro de Serviço" url="cadastroServico.xhtml"  />
+		<p:menuitem value="Cadastro de Pessoa" url="cadastroPessoa.xhtml"  />
+		<p:menuitem value="Cadastro de Forma de Pagamento" url="cadastroFormaPagamento.xhtml"  />
+		
+		
+	</p:tabMenu>
+
+	<h:form>
+		<div align="center">
+			
+			<p:panel id="formularioFormaPagamento" header="Cadastro de Forma de Pagamento" style="margin-bottom:40px">
+            <p:growl id="msgs" sticky="true"/>    
+            
+	            <h:panelGrid columns="2" cellpadding="2">        
+				
+   			    <p:outputLabel value="Id:" for="acID"/>
+				<p:autoComplete id="acID" value="#{cadastroFormaPagamentoCtrl.formaPagamento.id}" readonly="true"/>
+				
+				<p:outputLabel value="Descrição:" for="acDescricao"/>
+				<p:autoComplete id="acDescricao" value="#{cadastroFormaPagamentoCtrl.formaPagamento.descricao}" readonly="false"/>
+				
+				<p:outputLabel value="N Max Parcelas:" for="acNMaxParcelas"/>
+				<p:autoComplete id="acNMaxParcelas" value="#{cadastroFormaPagamentoCtrl.formaPagamento.numMaxParcelas}" readonly="false"/>
+				
+				<p:outputLabel value="N Padrao Parcelas:" for="acNPadraoParcelas"/>
+				<p:autoComplete id="acNPadraoParcelas" value="#{cadastroFormaPagamentoCtrl.formaPagamento.numPadraoParcelas}" readonly="false"/>
+				
+				<p:outputLabel value="Intervalo de Dias:" for="acIntervaloDias"/>
+				<p:autoComplete id="acIntervaloDias" value="#{cadastroFormaPagamentoCtrl.formaPagamento.intervalDias}" readonly="false"/>
+				
+				<p:outputLabel value="Percentual Acrescimo:" for="acPercentualAcrescimo"/>
+				<p:autoComplete id="acPercentualAcrescimo" value="#{cadastroFormaPagamentoCtrl.formaPagamento.percentualAcrescimo}" readonly="false"/>
+				
+				</h:panelGrid>
+				
+			</p:panel>
+			
+			<br />
+			      
+			<p:commandButton value="Cadastrar" id="idCadastrar" action="#{cadastroFormaPagamentoCtrl.actionGravar}" update="tabelaFormaPagamento formularioFormaPagamento"
+            	style="margin-right:10px;" icon="pi pi-save"/>
+            	
+			<p:commandButton value="Editar" id="idEditar" action="#{cadastroFormaPagamentoCtrl.actionEditar}" update="tabelaFormaPagamento formularioFormaPagamento"
+            	style="margin-right:10px;" icon="pi pi-save"/>            	
+            	
+			<p:commandButton value="Excluir" id="idExcluir" action="#{cadastroFormaPagamentoCtrl.actionExcluir}" update="tabelaFormaPagamento formularioFormaPagamento"
+            	style="margin-right:10px;" icon="pi pi-save"/>  				
+			            	                
+			<p:commandButton value="Limpar" id="idLimpar" action="#{cadastroFormaPagamentoCtrl.limpar}" update="@form"
+                  style="margin-right:10px;" icon="pi pi-save" immediate="true" process="@this"/>
+            
+		</div>
+		
+		<br/>
+		
+		<p:dataTable value="#{cadastroFormaPagamentoCtrl.formaPagamentos}" id="tabelaFormaPagamento" var="formaPagamento" paginator="true" rows="4">
+
+				<p:column headerText="ID" style="width:20px">
+					<h:outputText value="#{formaPagamento.id}" />
+				</p:column>
+
+				<p:column headerText="Descrição">
+					<h:outputText value="#{formaPagamento.descricao}" />
+				</p:column>
+
+			</p:dataTable>
+		
+	</h:form>
+</h:body>
+
+</html>
+

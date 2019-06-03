@@ -1,9 +1,13 @@
 package bean;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="formaPagamento")
 public class FormaPagamento {
 	
 	@Id
@@ -73,7 +77,6 @@ public class FormaPagamento {
 	public void setPercentualAcrescimo(float percentualAcrescimo) {
 		this.percentualAcrescimo = percentualAcrescimo;
 	}
-	
-	
 
+	
 }
