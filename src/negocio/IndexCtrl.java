@@ -1,6 +1,7 @@
 package negocio;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import bean.ItensPedido;
 import bean.Produto;
 import persistencia.ProdutoDAO;
 import util.AjudanteContextoFaces;
@@ -19,12 +21,14 @@ public class IndexCtrl {
 
 	private static final String LOCAL_HOST = "localhost";
 
-	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
-	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	// private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
 
 	private Produto produto;
 
-	private List<Produto> produtos; // = new ArrayList<>();
+	private List<Produto> produtos; 
+		
+	private List<ItensPedido> itensPedidos = new ArrayList();
 
 	public IndexCtrl() {
 
@@ -36,8 +40,7 @@ public class IndexCtrl {
 
 		produtos = ProdutoDAO.consultar();
 
-		produtos = buscarImagensProdutos(produtos);		
-		
+		produtos = buscarImagensProdutos(produtos);
 
 	}
 
@@ -101,7 +104,7 @@ public class IndexCtrl {
 
 				return afile[i].getName();
 
-			} 
+			}
 		}
 
 		return "";
@@ -118,9 +121,54 @@ public class IndexCtrl {
 		this.produtos = produtos;
 
 	}
+	
+	public void adicionarCarrinho(Produto p) {
 
-	public void adicionarCarrinho() {
+		if (p.getId() > 0) {
+
+			ItensPedido itemPedido = new ItensPedido();
+			
+			itemPedido.setProduto(p);
+			
+			itemPedido.setQuantidade(1);
+			
+			itemPedido.setValorUnitario(p.getPreco());
+			
+			itemPedido.setSubTotal(p.getPreco());
+			
+			itensPedidos.add(itemPedido);
+						
+		} 
 
 	}
+	
+	public void mostrarCarrinho() {
+		System.out.println("Itens no Carrinho: " + getItensPedidos());
+	}
+	
+	public void finalizarCompra() {
+		
+		
+		
+		
+	}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public List<ItensPedido> getItensPedidos() {
+		return itensPedidos;
+	}
+
+	public void setItensPedidos(List<ItensPedido> itensPedidos) {
+		this.itensPedidos = itensPedidos;
+	}
+
+	
 
 }

@@ -37,7 +37,7 @@
 
 		<p:panel header="Catálogo de Produtos">
 
-			<p:dataTable value="#{indexCtrl.produtos}" id="tabelaProduto" var="produto" paginator="true" rows="4">
+			<p:dataTable value="#{indexCtrl.produtos}" id="tabelaProduto" var="produto" paginator="true" rows="4" rowIndexVar="rowIdProduto" >
 
 				<p:column headerText="ID" style="width:20px">
 					<h:outputText value="#{produto.id}" />
@@ -63,8 +63,8 @@
 				</p:column>
 
 				<p:column headerText="Adicionar no Carrinho">
-					<p:commandLink value="Add no meu carrinho"
-						action="#{indexCtrl.adicionarCarrinho}" />
+					<p:commandLink value="Add no meu carrinho" id="btnAdicionarCarrinho#{rowIdProduto}"
+						action="#{indexCtrl.adicionarCarrinho(produto)}" />
 				</p:column>
 
 			</p:dataTable>
@@ -74,10 +74,31 @@
 		<br />
 
 		<div align="right" style="horizontal-align: center;">
+
+			<p:commandButton value="Visualizar Carrinhoooo" icon="pi pi-save" actionListener="#{indexCtrl.mostrarCarrinho}" onclick="PF('dlg2').show();" update="tabelaItensPedidos"/>	
+			 
 			<p:commandButton value="Finalizar Compra" id="idFinalizar"
-				action="#{indexCtrl.finalizarCompra}" update="tabelaProduto"
-				icon="pi pi-save" />
+				action="#{indexCtrl.finalizarCompra}" icon="pi pi-save" />
+                  				
 		</div>
+		
+		 <p:dialog id="idDialog" header="Visualizar Carrinho" widgetVar="dlg2" modal="true" height="400" width="600" >
+			 
+			 <h:outputText value="Itens no meu Carrinho" />
+    			 
+   			 <p:dataTable id="tabelaItensPedidos" value="#{indexCtrl.itensPedidos}" var="itemPedido" >
+   			 
+   			 	<p:column headerText="ID" style="width:20px">
+   				 	<h:outputText value="#{itemPedido.quantidade}" />
+				</p:column>
+					
+				<p:column headerText="Valor Unitário" >
+						<h:outputText value="#{itemPedido.valorUnitario}" />
+				</p:column>
+					
+   			 </p:dataTable>
+    			 
+		 </p:dialog>
 
 	</h:form>
 

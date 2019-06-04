@@ -39,6 +39,12 @@ public class ItensPedido {
 	
 	@Column(name = "subTotal", nullable=true)
 	private float subTotal;
+	
+	@Override
+	public String toString() {
+		return "ItensPedido [id=" + id + ", quantidade=" + quantidade + ", valorUnitario=" + valorUnitario
+				+ ", subTotal=" + subTotal + "]";
+	}
 
 	public long getId() {
 		return id;
