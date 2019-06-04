@@ -36,7 +36,7 @@ public class CadastroProdutoCtrl {
 
 	private Produto produto;
 
-	private List<Produto> produtos; // = new ArrayList<>();
+	private List<Produto> produtos; 
 
 	private Produto produtoSelecionado;
 
@@ -116,7 +116,7 @@ public class CadastroProdutoCtrl {
 		this.produtos = ProdutoDAO.consultar();
 		
 		setListaArquivo(new ArrayList<Arquivo>());
-
+	
 		System.out.println("limpando...");
 
 	}
