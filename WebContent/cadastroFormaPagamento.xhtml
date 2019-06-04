@@ -88,14 +88,33 @@
 		
 		<br/>
 		
-		<p:dataTable value="#{cadastroFormaPagamentoCtrl.formaPagamentos}" id="tabelaFormaPagamento" var="formaPagamento" paginator="true" rows="4">
-
+		<p:dataTable value="#{cadastroFormaPagamentoCtrl.formaPagamentos}" id="tabelaFormaPagamento" var="formaPagamento" selectionMode="single" selection="#{cadastroFormaPagamentoCtrl.formaPagamentoSelecionado}" rowKey="#{formaPagamento}" paginator="true" rows="4">
+	        <p:ajax event="rowSelect" listener="#{cadastroFormaPagamentoCtrl.aoSelecionar}" update="@form" />
+            <p:ajax event="rowUnselect" listener="#{cadastroFormaPagamentoCtrl.aoDesselecionar}" update="@form" />
+			
+		
 				<p:column headerText="ID" style="width:20px">
 					<h:outputText value="#{formaPagamento.id}" />
 				</p:column>
 
 				<p:column headerText="Descrição">
 					<h:outputText value="#{formaPagamento.descricao}" />
+				</p:column>
+				
+				<p:column headerText="N Max Parcelas">
+					<h:outputText value="#{formaPagamento.numMaxParcelas}" />
+				</p:column>
+				
+				<p:column headerText="N Padrao Parcelas">
+					<h:outputText value="#{formaPagamento.numPadraoParcelas}" />
+				</p:column>
+				
+				<p:column headerText="Intervalo de Dias">
+					<h:outputText value="#{formaPagamento.intervalDias}" />
+				</p:column>
+				
+				<p:column headerText="Percentual Acrescimo">
+					<h:outputText value="#{formaPagamento.percentualAcrescimo}" />
 				</p:column>
 
 			</p:dataTable>

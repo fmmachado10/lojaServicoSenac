@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 import bean.FormaPagamento;
 import bean.Pessoa;
+import bean.Servico;
 import persistencia.FormaPagamentoDAO;
 import persistencia.PessoaDAO;
 
@@ -17,6 +18,8 @@ public class CadastroFormaPagamentoCtrl {
 	private FormaPagamento formaPagamento;
 
 	private List<FormaPagamento> formaPagamentos; 
+	
+	private FormaPagamento formaPagamentoSelecionado;
 	
 	
 	public CadastroFormaPagamentoCtrl() {
@@ -105,6 +108,28 @@ public class CadastroFormaPagamentoCtrl {
 
 		System.out.println("limpando...");
 
+	}
+	
+	public void aoSelecionar() {
+
+		this.formaPagamento = formaPagamentoSelecionado;
+
+	}
+
+	public void aoDesselecionar() {
+
+		limpar();
+
+	}
+
+
+	public FormaPagamento getFormaPagamentoSelecionado() {
+		return formaPagamentoSelecionado;
+	}
+
+
+	public void setFormaPagamentoSelecionado(FormaPagamento formaPagamentoSelecionado) {
+		this.formaPagamentoSelecionado = formaPagamentoSelecionado;
 	}
 	
 	
