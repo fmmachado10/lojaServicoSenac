@@ -75,7 +75,7 @@
 
 		<div align="right" style="horizontal-align: center;">
 
-			<p:commandButton value="Visualizar Carrinhoooo" icon="pi pi-save" actionListener="#{indexCtrl.mostrarCarrinho}" onclick="PF('dlg2').show();" update="tabelaItensPedidos"/>	
+			<p:commandButton value="Visualizar Carrinhoooo" icon="pi pi-save" actionListener="#{indexCtrl.mostrarCarrinho}" onclick="PF('dlg2').show();" update="tabelaItensPedidos valorTotal"/>	
 			 
 			<p:commandButton value="Finalizar Compra" id="idFinalizar"
 				action="#{indexCtrl.finalizarCompra}" icon="pi pi-save" />
@@ -88,16 +88,24 @@
     			 
    			 <p:dataTable id="tabelaItensPedidos" value="#{indexCtrl.itensPedidos}" var="itemPedido" >
    			 
-   			 	<p:column headerText="ID" style="width:20px">
+   			 	<p:column headerText="Produto" style="width:130px" >
+   				 	<h:outputText value="#{itemPedido.produto.nome}" />
+				</p:column>
+   			 
+   			 	<p:column headerText="Qtd" style="width:15px" >
    				 	<h:outputText value="#{itemPedido.quantidade}" />
 				</p:column>
-					
-				<p:column headerText="Valor Unitário" >
+   			 		
+				<p:column headerText="Vl Unit" style="width:15px" >
 						<h:outputText value="#{itemPedido.valorUnitario}" />
 				</p:column>
 					
    			 </p:dataTable>
-    			 
+   			 
+   			 <div align="right" style="horizontal-align: center;">
+   			 	 <h:outputText id="valorTotal" value="#{indexCtrl.totalString}" style="color: #DF0101; text-align: center; "  />
+   			 </div>
+   			 	 
 		 </p:dialog>
 
 	</h:form>

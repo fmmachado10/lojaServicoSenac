@@ -29,7 +29,11 @@ public class IndexCtrl {
 	private List<Produto> produtos; 
 		
 	private List<ItensPedido> itensPedidos = new ArrayList();
-
+	
+	private int total;
+	
+	private String totalString;
+	
 	public IndexCtrl() {
 
 		if (produto == null) {
@@ -83,8 +87,7 @@ public class IndexCtrl {
 
 	public String getServerName() {
 
-		HttpServletRequest request = (HttpServletRequest) AjudanteContextoFaces.getFacesContext().getExternalContext()
-				.getRequest();
+		HttpServletRequest request = (HttpServletRequest) AjudanteContextoFaces.getFacesContext().getExternalContext().getRequest();
 
 		return request.getServerName();
 
@@ -137,22 +140,36 @@ public class IndexCtrl {
 			itemPedido.setSubTotal(p.getPreco());
 			
 			itensPedidos.add(itemPedido);
+			
+			total += p.getPreco();
 						
 		} 
 
 	}
 	
 	public void mostrarCarrinho() {
+		
 		System.out.println("Itens no Carrinho: " + getItensPedidos());
+		
 	}
 	
 	public void finalizarCompra() {
 		
 		
+	}	
+
+	public String getTotalString() {
 		
+		return "Total: " + getTotal();
 		
 	}
-	
+
+	public void setTotalString(String totalString) {
+		
+		this.totalString = totalString;
+		
+	}
+
 	public Produto getProduto() {
 		return produto;
 	}
@@ -167,6 +184,14 @@ public class IndexCtrl {
 
 	public void setItensPedidos(List<ItensPedido> itensPedidos) {
 		this.itensPedidos = itensPedidos;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	
