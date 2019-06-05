@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,9 +32,9 @@ public class CadastroProdutoCtrl {
 	
 	private static final String LOCAL_HOST = "localhost";
 	
-	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
+	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
 	
-	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
 	
 	private static final String CAMINHO_IMAGEM = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens\\";
 
@@ -76,6 +78,9 @@ public class CadastroProdutoCtrl {
 		if (produto.getId() == 0) {
 			
 			ProdutoDAO.inserir(produto);
+			
+			FacesMessage message = new FacesMessage("Produto adicionado.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 			
 		} else {
 

@@ -2,8 +2,11 @@ package negocio;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import bean.Pessoa;
 import enumerador.EnumTipoPessoa.TipoPessoa;
 import persistencia.PessoaDAO;
@@ -50,6 +53,9 @@ public class CadastroPessoaCtrl {
 		if (pessoa.getId() == 0) {
 
 			PessoaDAO.inserir(pessoa);
+			
+			FacesMessage message = new FacesMessage("Pessoa adicionada.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 			
 			limpar();
 

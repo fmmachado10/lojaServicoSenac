@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,8 +27,8 @@ public class IndexCtrl {
 
 	private static final String LOCAL_HOST = "localhost";
 
-	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
-	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
 
 	private Produto produto;
 
@@ -36,6 +37,8 @@ public class IndexCtrl {
 	private List<ItensPedido> itensPedidos = new ArrayList();
 	
 	private int total;
+	
+	private String message;
 	
 	public IndexCtrl() {
 
@@ -147,6 +150,9 @@ public class IndexCtrl {
 			itensPedidos.add(itemPedido);
 			
 			total += p.getPreco();
+			
+			FacesMessage message = new FacesMessage("Item adicionado no carrinho.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 						
 		} 
 
@@ -184,6 +190,8 @@ public class IndexCtrl {
 		actionGravarPedido(pedido);
 		
 		System.out.println("Compra finalizada!");
+		FacesMessage message = new FacesMessage("Compra Finalizada.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 		
 	}	
 	
@@ -245,6 +253,14 @@ public class IndexCtrl {
 
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	
