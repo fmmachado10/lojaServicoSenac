@@ -2,6 +2,7 @@ package negocio;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,8 +11,14 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import bean.FormaPagamento;
 import bean.ItensPedido;
+import bean.Pedido;
+import bean.Pessoa;
 import bean.Produto;
+import persistencia.FormaPagamentoDAO;
+import persistencia.PedidoDAO;
+import persistencia.PessoaDAO;
 import persistencia.ProdutoDAO;
 import util.AjudanteContextoFaces;
 
@@ -31,8 +38,6 @@ public class IndexCtrl {
 	private List<ItensPedido> itensPedidos = new ArrayList();
 	
 	private int total;
-	
-	private String totalString;
 	
 	public IndexCtrl() {
 
@@ -133,6 +138,8 @@ public class IndexCtrl {
 			
 			itemPedido.setProduto(p);
 			
+			itemPedido.setServico(null);
+			
 			itemPedido.setQuantidade(1);
 			
 			itemPedido.setValorUnitario(p.getPreco());
@@ -155,18 +162,62 @@ public class IndexCtrl {
 	
 	public void finalizarCompra() {
 		
+		System.out.println("Finalizando compra...");
+		
+		Pedido pedido = new Pedido();
+		
+		FormaPagamento formaPagamento = new FormaPagamento();
+		formaPagamento = FormaPagamentoDAO.buscarFormaPagamentoPadrao();
+		
+		pedido.setFormaPagamento(formaPagamento);
+		pedido.setDataAutorizacao(new Date());
+		pedido.setDataEmissao(new Date());
+		pedido.setDesconto((float) 0);
+		pedido.setStatus("Aguardando pagamento");
+		pedido.setTotalGeral((float) getTotal());
+		pedido.setTotalProduto((float) getTotal());
+		pedido.setTotalServico((float) 0);
+		pedido.setItensPedidos(getItensPedidos());
+		
+		actionGravarPedido(pedido);
+		
+		System.out.println("Compra finalizada!");
 		
 	}	
+	
+	
+	public void actionGravarPedido(Pedido pedido) {
+
+		if (pedido.getId() == 0) {
+
+			PedidoDAO.inserir(pedido);
+			
+			limpar();
+
+		} else {
+
+			PedidoDAO.alterar(pedido);
+			
+			limpar();
+
+		}
+
+		limpar();
+
+	}
+	
+	public void limpar() {
+		
+		setItensPedidos(new ArrayList());
+
+		System.out.println("limpando...");
+
+	}
+
 
 	public String getTotalString() {
 		
 		return "Total: " + getTotal();
-		
-	}
-
-	public void setTotalString(String totalString) {
-		
-		this.totalString = totalString;
 		
 	}
 

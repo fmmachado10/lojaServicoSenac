@@ -54,4 +54,19 @@ public class FormaPagamentoDAO {
 
 	}
 
+	public static FormaPagamento buscarFormaPagamentoPadrao() {
+		
+		Session sessao = HibernateUtil.getSesseionfactory().openSession();
+
+		Query consulta = null;			
+
+		consulta = sessao.createQuery("from FormaPagamento order by descricao");
+
+		List lista = consulta.list();
+		
+		sessao.close();
+		
+		return (FormaPagamento) lista.get(0);
+	}
+
 }
