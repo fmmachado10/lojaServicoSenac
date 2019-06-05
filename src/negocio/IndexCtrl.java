@@ -14,11 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import bean.FormaPagamento;
 import bean.ItensPedido;
 import bean.Pedido;
-import bean.Pessoa;
 import bean.Produto;
 import persistencia.FormaPagamentoDAO;
 import persistencia.PedidoDAO;
-import persistencia.PessoaDAO;
 import persistencia.ProdutoDAO;
 import util.AjudanteContextoFaces;
 
@@ -28,8 +26,8 @@ public class IndexCtrl {
 
 	private static final String LOCAL_HOST = "localhost";
 
-	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
-	// private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	//private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOSSENAC\\LOJASERVICO\\lojaServicoSenac\\WebContent\\resources\\imagens";
+	private static final String CAMINHO_IMAGEM_LOCALHOST = "C:\\PROJETOS\\LOJASERVICOS\\lojaServicoSenac\\WebContent\\resources\\imagens";
 
 	private Produto produto;
 
@@ -178,6 +176,10 @@ public class IndexCtrl {
 		pedido.setTotalProduto((float) getTotal());
 		pedido.setTotalServico((float) 0);
 		pedido.setItensPedidos(getItensPedidos());
+		
+		for(ItensPedido item: pedido.getItensPedidos()) {
+			item.setPedido(pedido);
+		}
 		
 		actionGravarPedido(pedido);
 		

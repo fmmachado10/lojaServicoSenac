@@ -29,7 +29,7 @@ public class Pedido {
 	@OneToOne(fetch = FetchType.LAZY)
 	private FormaPagamento formaPagamento;
 	
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private List<ItensPedido> itensPedidos;
 	
 	@Column(name = "dataEmissao", nullable = false)

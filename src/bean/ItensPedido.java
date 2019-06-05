@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,12 +22,12 @@ public class ItensPedido {
 	@ManyToOne(optional = false)
 	private Pedido pedido;
 	
-	@JoinColumn(name = "produto_id", referencedColumnName = "pro_id")
-	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "produto_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
 	
-	@JoinColumn(name = "servico_id", referencedColumnName = "id")
-	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "servico_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Servico servico;
 	
 	@Column(name = "quantidade", nullable=true)
